@@ -3,36 +3,10 @@
 <meta charset='utf-8'>
 </head>
 
-<body>
-<h1>ビザスクユーザーテストにご協力ください。</h1>
-<p>
-ビザスクの表示変更に伴い、印象のヒアリングを行っています。<br />
-下の画像はアドバイザーを公募している案件の一覧画面のキャプチャです。<br />
-非常に大きな画面です。下にスクロールするとパターンA、右にスクロールするとパターンBがあります。<br />
-パターンAが現在のサイトの状態、パターンBには各公募の右上に応募数を追加しました。
-<p>
-<ul>
-<li>応募数を見て、少ないと感じましたか？多いと感じましたか？
-<li>あなたはアドバイザーを求めて公募を出そうと思っています。どちらが公募しやすいサイトに感じますか？
-<li>あなたはアドバイザーとして公募に応募しようと思っています。どちらが応募しやすいと感じますか？
-</ul>
+<body style=margin:0 onload="
+for(s=window.screen,w=q.width=s.width,h=q.height=s.height,m=Math.random,p=[],i=0;i<256;p[i++]=1);
+setInterval('9Style=\'rgba(0,0,0,.05)\'9Rect(0,0,w,h)9Style=\'#0F0\';
+p.map(function(v,i){9Text(String.fromCharCode(3e4+m()*33),i*10,v);p[i]=v>758+m()*1e4?0:v+10})'.split(9).join(';q.getContext(\'2d\').fill'),33)
+"><canvas id=q>
 
-<table>
-<tr>
-  <td><h2>パターンA, ページ1</h2><img src="A/1.png" /></td>
-  <td><h2>パターンB, ページ1</h2><img src="B/1.png" /></td>
-</tr>
-<tr>
-  <td><h2>パターンA, ページ2</h2><img src="A/2.png" /></td>
-  <td><h2>パターンB, ページ2</h2><img src="B/2.png" /></td>
-</tr>
-<tr>
-  <td><h2>パターンA, ページ3</h2><img src="A/3.png" /></td>
-  <td><h2>パターンB, ページ3</h2><img src="B/3.png" /></td>
-</tr>
-<tr>
-  <td><h2>パターンA, ページ4</h2><img src="A/4.png" /></td>
-  <td><h2>パターンB, ページ4</h2><img src="B/4.png" /></td>
-</tr>
-</body>
 </html>
