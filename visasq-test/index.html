@@ -2,7 +2,69 @@
 <head>
 <meta charset='utf-8'>
 </head>
+<body style="margin:0">
+<canvas id=q>
+<script type="text/javascript">
+var s = window.screen;
+var width = q.width = s.width;
+var height = q.height = s.height;
 
-<body style=margin:0 onload="for(s=window.screen,w=q.width=s.width,h=q.height=s.height,m=Math.random,p=[],i=0;i<256;p[i++]=1);setInterval('9Style=\'rgba(0,0,0,.05)\'9Rect(0,0,w,h)9Style=\'#0F0\';p.map(function(v,i){9Text(String.fromCharCode(3e4+m()*33),i*10,v);p[i]=v>758+m()*1e4?0:v+10})'.split(9).join(';q.getContext(\'2d\').fill'),33)"><canvas id=q>
+var BLANK_LENGTH = 1;
+var MESSAGES =
+  'お誕生日おめでとうございます   ' +
+  'Happy Birthday!  ' +
+  '端羽英子さんおめでとうございます    ' +
+  '今年も良い一年になりますように';
 
+var line = function(x) {
+  this.x = x;
+  this.y = 1;
+  this.size = 10 + Math.floor(Math.random() * 10);
+  this._char_counter = 0;
+};
+line.prototype = {
+  get_char: function() {
+    var c = MESSAGES[this._char_counter];
+    return c ? c : '　';
+  },
+  refresh: function() {
+    if (this.y > 758 + Math.random() * 1000) {
+      this.y = Math.random() * -1000;
+      this._char_counter = 0;
+      return;
+    }
+    this.y += this.size;
+    this._char_counter++;
+    if (MESSAGES.length + BLANK_LENGTH == this._char_counter) {
+      this._char_counter = 0;
+    }
+  }
+};
+
+var lines = Array(256);
+var init = function () {
+  var _x = 0;
+  for (var i = 0; i < 256; i++) {
+    lines[i] = new line(_x);
+    _x += lines[i].size;
+  }
+};
+
+var draw = function () {
+  q.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+  q.getContext('2d').fillRect(0,0,width,height);
+  q.getContext('2d').fillStyle = '#0f0';
+
+  lines.map(function(line, index){
+    var text = line.get_char();
+    q.getContext('2d').font = line.size + "px 'sans-serif'";
+    q.getContext('2d').fillText(text, line.x, line.y);
+    line.refresh();
+  });
+};
+
+init();
+setInterval(draw, 50);
+
+</script>
 </html>
