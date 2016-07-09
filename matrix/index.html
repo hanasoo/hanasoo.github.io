@@ -9,23 +9,28 @@ var s = window.screen;
 var width = q.width = s.width;
 var height = q.height = s.height;
 
-var BLANK_LENGTH = 1;
-var MESSAGES =
-  'お誕生日おめでとうございます   ' +
-  'Happy Birthday!  ' +
-  '端羽英子さんおめでとうございます    ' +
-  '今年も良い一年になりますように';
+var BLANK_LENGTH = 1,
+    MESSAGES = 'お誕生日おめでとうございます   ' +
+               'Happy Birthday!  ' +
+               '端羽英子さんおめでとうございます    ' +
+               '今年も良い一年になりますように',
+    FONT_MIN_SIZE = 10,
+    FONT_MAX_SIZE = 20,
+    VERTICAL_LINE_NUM = 256,
+    REFRESH_INTERVAL = 1000 / 20;
 
 var line = function(x) {
   this.x = x;
   this.y = 1;
-  this.size = 10 + Math.floor(Math.random() * 10);
+  this.size = FONT_MIN_SIZE + Math.floor(Math.random() * (FONT_MAX_SIZE - FONT_MIN_SIZE));
   this._char_counter = 0;
 };
 line.prototype = {
   get_char: function() {
-    var c = MESSAGES[this._char_counter];
-    return c ? c : '　';
+    if (MESSAGES[this._char_counter]) {
+      return MESSAGES[this._char_counter]
+    }
+    return '　';
   },
   refresh: function() {
     if (this.y > 758 + Math.random() * 1000) {
@@ -41,10 +46,10 @@ line.prototype = {
   }
 };
 
-var lines = Array(256);
+var lines = Array(VERTICAL_LINE_NUM);
 var init = function () {
   var _x = 0;
-  for (var i = 0; i < 256; i++) {
+  for (var i = 0; i < VERTICAL_LINE_NUM; i++) {
     lines[i] = new line(_x);
     _x += lines[i].size;
   }
@@ -56,15 +61,14 @@ var draw = function () {
   q.getContext('2d').fillStyle = '#0f0';
 
   lines.map(function(line, index){
-    var text = line.get_char();
     q.getContext('2d').font = line.size + "px 'sans-serif'";
-    q.getContext('2d').fillText(text, line.x, line.y);
+    q.getContext('2d').fillText(line.get_char(), line.x, line.y);
     line.refresh();
   });
 };
 
 init();
-setInterval(draw, 50);
+setInterval(draw, REFRESH_INTERVAL);
 
 </script>
 </html>
