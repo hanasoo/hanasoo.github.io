@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta charset='utf-8'>
+</head>
+<body style="margin:0">
+<canvas id=q>
+<script type="text/javascript">
+var s = window.screen;
+var WIDTH = q.width = s.width,
+    HEIGHT = q.height = s.height,
+    MESSAGES = ['お誕生日おめでとうございます',
+                'Happy Birthday!',
+                '端羽英子さんおめでとうございます',
+                '今年も良い一年になりますように'],
+    FONT_MIN_SIZE = 50,
+    FONT_MAX_SIZE = 200,
+    FONT_SPEED = 10,
+    REFRESH_INTERVAL = 1000 / 20,
+    START_LINE_EXTRA = 200;
+
+var line = function(message) {
+  this.size = FONT_MIN_SIZE + Math.floor(Math.random() * (FONT_MAX_SIZE - FONT_MIN_SIZE));
+  this.message = message;
+  this.min_x = message.length * this.size * -1;
+  this.x = this.y = -9999;
+};
+line.prototype = {
+  refresh: function() {
+    if (this.x < this.min_x) {
+      this.x = WIDTH + START_LINE_EXTRA * Math.random();
+      this.y = Math.random() * HEIGHT;
+    } else {
+      this.x -= FONT_SPEED;
+    }
+  }
+};
+
+var lines = Array(MESSAGES.length);
+var init = function () {
+  MESSAGES.map(function(message, index){
+    lines[index] = new line(message);
+  });
+};
+
+var draw = function () {
+  q.getContext('2d').fillStyle = '#000';
+  q.getContext('2d').fillRect(0, 0, WIDTH, HEIGHT);
+  q.getContext('2d').fillStyle = '#ddd';
+
+  lines.map(function(line, index){
+    line.refresh();
+    q.getContext('2d').font = line.size + "px 'sans-serif'";
+    q.getContext('2d').fillText(line.message, line.x, line.y);
+  });
+};
+
+init();
+setInterval(draw, REFRESH_INTERVAL);
+
+</script>
+</html>
