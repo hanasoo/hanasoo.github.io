@@ -2,6 +2,15 @@
 header.result_0 {
   background-image: url('../img/result_0.jpg');
 }
+header.result_1 {
+  background-image: url('../img/result_1.jpg');
+}
+header.result_2 {
+  background-image: url('../img/result_2.jpg');
+}
+header.result_3 {
+  background-image: url('../img/result_3.jpg');
+}
 
 .header-cover {
   width: 100%;
