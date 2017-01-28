@@ -1,0 +1,24 @@
+
+header.result_0 {
+  background-image: url('../img/result_0.jpg');
+}
+
+.header-cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(100, 100, 100, 0.6);
+}
+
+.btn-fb {
+  color: #4267b2;
+}
+
+section {
+  padding-bottom: 500px;
+}
+
+label {
+  font-size: large;
+  padding-bottom: 10px;
+}
